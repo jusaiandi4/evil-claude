@@ -106,7 +106,8 @@ export function TelegramProvider({ children }: { children: React.ReactNode }) {
 
     try {
       const lp = retrieveLaunchParams();
-      const tgUser = lp.initData?.user;
+       const initData = lp.initData as { user?: { id: number; first_name: string; last_name?: string; username?: string; photo_url?: string; is_premium?: boolean } } | undefined;
+      const tgUser = initData?.user;
       const theme = pickTheme((lp.themeParams ?? {}) as Record<string, string | undefined>);
       setValue({
         isReady: true,
