@@ -51,6 +51,17 @@ const DEFAULT_VALUE: TelegramContextValue = {
 
 const TelegramContext = createContext<TelegramContextValue>(DEFAULT_VALUE);
 
+// Raw Telegram initData shape — typed locally because the SDK's published
+// types are unstable across versions (initData can arrive typed as {}).
+interface TgRawUser {
+  id: number;
+  first_name: string;
+  last_name?: string;
+  username?: string;
+  photo_url?: string;
+  is_premium?: boolean;
+}
+
 function luminance(hex?: string): number {
   if (!hex) return 0;
   let c = hex.replace("#", "");
@@ -106,14 +117,14 @@ export function TelegramProvider({ children }: { children: React.ReactNode }) {
 
     try {
       const lp = retrieveLaunchParams();
-      const initData = lp.initData as { user?: { id: number; first_name: string; last_name?: string; username?: string; photo_url?: string; is_premium?: boolean } } | undefined;
+      // Cast through unknown — SDK types don't model initData's real shape.
+      const initData = lp.initData as unknown as { user?: TgRawUser } | undefined;
       const tgUser = initData?.user;
       const theme = pickTheme((lp.themeParams ?? {}) as Record<string, string | undefined>);
-      const platform = (lp.platform as string) ?? "unknown";
+      setValue({
         isReady: true,
         isTelegram: true,
-        platform,
-
+        platform: String(lp.platform ?? "unknown"),
         user: tgUser
           ? {
               id: tgUser.id,

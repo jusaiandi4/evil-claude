@@ -1,29 +1,8 @@
-```
-# Dependencies
-node_modules/
-
-# Logs and temp files
-*.log
-*.tmp
-
-# Environment
-.env
-.env.local
-.env.*
-
-# Editors
-.vscode/
-.idea/
-
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-venv/
-.venv/
-.env
-.env.local
-.env.*
-```
+/node_modules
+/.next/
+/out/
+.DS_Store
+.env*.local
+.vercel
+*.tsbuildinfo
+repomix-output.xml

@@ -1,10 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 import Script from "next/script";
 import { TelegramProvider } from "@/components/telegram/TelegramProvider";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "Evil Claude — Reasoning Studio",
@@ -21,7 +19,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en">
       <body className="min-h-dvh bg-coal-950 font-sans text-zinc-200 antialiased">
         <Script
           src="https://telegram.org/js/telegram-web-app.js"
