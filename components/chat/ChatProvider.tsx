@@ -27,7 +27,7 @@ interface ChatContextValue {
   modes: Record<ModeKey, boolean>;
   draft: string;
   setDraft: (value: string) => void;
-  inputRef: React.RefObject<HTMLTextAreaElement | null>;
+  inputRef: React.RefObject<HTMLTextAreaElement>;
   selectedModelId: string;
   setSelectedModelId: (id: string) => void;
   modal: ModalKey;
@@ -75,7 +75,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     systemPrompt: "",
   });
 
-  const inputRef = useRef<HTMLTextAreaElement | null>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const toastTimer = useRef<number | undefined>(undefined);
   const abortRef = useRef<AbortController | null>(null);
 
