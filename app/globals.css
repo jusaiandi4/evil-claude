@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --tg-theme-bg-color: #0b0c10;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #0b0c10;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app-shell {
+  height: 100vh;
+  height: 100dvh;
+}
+
+::selection {
+  background: rgba(255, 92, 26, 0.35);
+  color: #fff;
+}
+
+*:focus-visible {
+  outline: 2px solid rgba(255, 122, 61, 0.6);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Settings → "Reduce motion": kills all animation/transition globally */
+.no-motion *,
+.no-motion *::before,
+.no-motion *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@keyframes dot-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
