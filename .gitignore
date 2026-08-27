@@ -1,37 +1,19 @@
-```gitignore
+```
 # Dependencies
 node_modules/
 
-# Build outputs
-dist/
-build/
-.next/
-.nuxt/
-public/dist/
-*.bundle.js
-*.min.js
-*.map
+# Logs and temp files
+*.log
+*.tmp
 
-# Environment variables
+# Environment
 .env
 .env.local
 .env.*
-!.env.example
 
-# IDE files
+# Editors
 .vscode/
 .idea/
-*.swp
-*.swo
-*.tmp
-
-# Logs
-*.log
-
-# Coverage reports
-coverage/
-htmlcov/
-*.coverage
 
 # Python
 __pycache__/
@@ -39,87 +21,9 @@ __pycache__/
 *.pyo
 *.pyd
 .Python
-env/
 venv/
 .venv/
-pip-log.txt
-pip-delete-this-directory.txt
-.tox/
-.coverage
-.nox/
-*.mo
-*.pot
-
-# Node.js
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-node_modules/
-dist/
-build/
-.nyc_output
-coverage/
-.nyc_output/
-.repl_history
-.vercel/
-.now/
-
-# TypeScript
-*.tsbuildinfo
-*.js.map
-*.jsx.map
-*.ts.map
-*.tsx.map
-
-# Next.js
-.next
-out/
-build/
-
-# Nuxt.js
-.nuxt
-dist
-.output
-.gridsome
-.cache
-
-# Vue.js
-dist/
-.build/
-.vuepress/dist
-.temp
-.output
-
-# Databases
-*.db
-*.db-journal
-*.sqlite
-*.sqlite3
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-desktop.ini
-Icon?
-VolumeIcon.icns
-
-# Temporary files
-*.tmp
-*.temp
-*.bak
-*.backup
-*~
-```
-
-Wait, I need to reconsider this. The only modified file is a TypeScript React component (`components/telegram/TelegramProvider.tsx`), which is source code, not a build artifact. There are no build artifacts, dependency directories, or temporary files in the change list that would require adding to .gitignore.
-
-Since there are no build artifacts, dependencies, or temp files to ignore, the correct output is empty.
-
-```gitignore
-
+.env
+.env.local
+.env.*
 ```
