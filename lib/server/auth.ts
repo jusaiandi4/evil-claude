@@ -10,7 +10,7 @@ export function validateInitData(raw?: string | null): TgAuth | null {
     const hash = params.get("hash");
     if (!hash) return null;
     params.delete("hash");
-    const dataCheck = [...params.entries()]
+    const dataCheck = Array.from(params.entries())
       .sort(([a], [b]) => (a < b ? -1 : 1))
       .map(([k, v]) => `${k}=${v}`)
       .join("\n");
