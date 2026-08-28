@@ -213,7 +213,7 @@ export function InputBar() {
         </div>
 
         <p className="mt-2.5 text-center text-[11px] text-zinc-600">
-          Ember can make mistakes. Verify important information. Press{" "}
+          Evil Claude can make mistakes. Verify important information. Press{" "}
           {settings.enterToSend ? (
             <>
               <kbd className="rounded-[5px] border border-white/[0.09] bg-white/[0.05] px-1.5 py-0.5 font-sans text-[10px] text-zinc-400">
