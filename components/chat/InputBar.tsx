@@ -178,18 +178,11 @@ export function InputBar() {
               <ModeChip icon={IconGlobe} label="Web" active={modes.web} onClick={() => toggleMode("web")} />
               <ModeChip icon={IconCode} label="Artifact" active={modes.artifact} onClick={() => toggleMode("artifact")} />
               <ModeChip
-                icon={IconPaperclip}
-                label={attachments.length ? `Attach (${attachments.length})` : "Attach"}
-                active={attachments.length > 0}
-                onClick={() => fileRef.current?.click()}
-              />
-              <ModeChip
                 icon={IconReasoning}
                 label="Reasoning"
                 active={modes.reasoning}
                 onClick={() => toggleMode("reasoning")}
               />
-              <input ref={fileRef} type="file" multiple className="hidden" onChange={handleFiles} />
             </div>
 
             {isTyping ? (

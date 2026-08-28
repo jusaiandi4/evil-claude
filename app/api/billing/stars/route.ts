@@ -1,50 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
-import { CREDIT_PACKS } from "@/lib/mock-data";
+import { SUB_PLANS } from "@/lib/plans";
 
 export const runtime = "nodejs";
 
-/**
- * Creates a Telegram Stars invoice link via the Bot API.
- * TODO(production): set a Bot API webhook (message: successful_payment) and
- * grant credits there — `payload` below is what your webhook receives back.
- */
 export async function POST(req: NextRequest) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
-  if (!token) {
-    return NextResponse.json({ error: "TELEGRAM_BOT_TOKEN is not configured" }, { status: 500 });
-  }
+  if (!token) return NextResponse.json({ error: "TELEGRAM_BOT_TOKEN not configured" }, { status: 500 });
 
-  let packId: string | undefined;
-  try {
-    ({ packId } = await req.json());
-  } catch {
-    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
-  }
-
-  const pack = CREDIT_PACKS.find((p) => p.id === packId);
-  if (!pack) {
-    return NextResponse.json({ error: "Unknown credit pack" }, { status: 400 });
-  }
+  let planId: string | undefined;
+  try { ({ planId } = await req.json()); } catch {}
+  const plan = SUB_PLANS.find((p) => p.id === planId);
+  if (!plan) return NextResponse.json({ error: "Unknown plan" }, { status: 400 });
 
   const res = await fetch(`https://api.telegram.org/bot${token}/createInvoiceLink`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
+    method: "POST", headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      title: `${pack.credits.toLocaleString()} Evil Claude Credits`,
-      description: "Credit pack for the Evil Claude reasoning studio",
-      payload: `credits:${pack.id}:${Date.now()}`,
+      title: `Evil Claude — ${plan.name}`,
+      description: `${plan.creditsPerMonth} messages / month, renews automatically`,
+      payload: `sub:${plan.id}`,
       currency: "XTR",
-      prices: [{ label: `${pack.credits} credits`, amount: pack.stars }],
+      prices: [{ label: `${plan.name} monthly`, amount: plan.stars }],
+      subscription_period: 2592000, // 30 days, auto-renews in Telegram
     }),
   });
-
   const data = await res.json();
-  if (!data?.ok || !data?.result) {
-    return NextResponse.json(
-      { error: data?.description ?? "Bot API rejected the invoice" },
-      { status: 502 },
-    );
-  }
-
+  if (!data?.ok) return NextResponse.json({ error: data?.description ?? "Invoice failed" }, { status: 502 });
   return NextResponse.json({ link: data.result });
 }
